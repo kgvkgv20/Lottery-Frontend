@@ -21,6 +21,7 @@
     "ethers": "^5.7.2",
     "framer-motion": "^10.12.16",
     "fs": "^0.0.1-security",
+    "json5": "^2.2.3",
     "moment": "^2.29.4",
     "moralis": "^2.21.0",
     "next": "13.1.6",
