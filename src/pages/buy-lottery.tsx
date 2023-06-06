@@ -3,28 +3,77 @@ import FlipCard, { BackCard, FrontCard } from "@/components/Flipcard/Flipcard";
 import { motion } from "framer-motion";
 import NFT from "public/images/nft.png";
 import Navbar from "@/components/Navbar/navbar-before-login";
-import { useAccount } from "wagmi";
+import { useAccount, Address } from "wagmi";
 import React, { useEffect, useState } from "react";
 import GetInstallment from "./services/contract/get-installment";
+import { jsonLottery } from "./services/uploadIPFS";
+import useMintLottery from "./services/contract/buy-lottery";
+import { BigNumber, ethers } from "ethers";
 
-
-export default function Home() {
+export default function BuyLotteryPage() {
   const { address } = useAccount();
-  const [lotteryNumber, setLotteryNumber] = useState("");
-  const { data, isError, isLoading } = GetInstallment();
-  
   const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     setMounted(true);
   }, []);
+  const [lotteryNumber, setLotteryNumber] = useState("");
+  const { data, isError, isLoading } = GetInstallment();
+  const installmentFromContract = data && data._hex;
+  const [uri, setUri] = useState("");
+
   console.log("Address", address);
   console.log("lotteryNumber", lotteryNumber);
-  const installment = data && data._hex;
 
   const handleLotteryNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setLotteryNumber(event.target.value);
+  };
+  const handleJsonLottery = async () => {
+    console.log("handleJsonLottery law ja");
+    try {
+      const number = lotteryNumber || ""; // Use an empty string as fallback if lotteryNumber is undefined
+      const installment = installmentFromContract || ""; // Use an empty string as fallback if installmentFromContract is undefined
+
+      const uri = await jsonLottery(number, installment);
+      console.log("URI:", uri);
+
+      handleMintLottery();
+      // Do something with the returned URI
+    } catch (error) {
+      console.log("Error calling jsonLottery:", error);
+    }
+  };
+
+  const parsedLotteryNumber = lotteryNumber
+    ? ethers.BigNumber.from(lotteryNumber)
+    : ethers.constants.Zero;
+
+  const {
+    data: mintData,
+    isError: mintError,
+    isLoading: mintLoading,
+    write,
+  } = useMintLottery(
+    address as Address,
+    // ethers.BigNumber.from(lotteryNumber),
+    parsedLotteryNumber,
+    uri
+  );
+
+  const handleMintLottery = async () => {
+    try {
+      if (write) {
+        await write();
+        console.log("Transaction successful");
+        setLotteryNumber("");
+      } else {
+        console.log("write is undefined");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
   };
 
   return (
@@ -57,7 +106,11 @@ export default function Home() {
                 );
               }}
             />
-            <button className="btn bg-primary text-secondary rounded-lg">
+            <button
+              className="btn bg-primary text-secondary rounded-lg"
+              onClick={handleJsonLottery}
+              type="submit"
+            >
               ซื้อเลย!
             </button>
           </div>
