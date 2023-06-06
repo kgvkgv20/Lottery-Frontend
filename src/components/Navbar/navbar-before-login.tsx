@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 
 export default function NavbarBeforeLogin() {
   return (
-    <div>
+    <div className="fixed w-screen">
       <div className="navbar bg-secondary shadow-xl">
         <div className="navbar-start">
           <Link href={"/"}>

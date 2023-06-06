@@ -23,17 +23,20 @@ export default function Layout({ children }: LayoutProps) {
   // }, [isConnected]);
 
   return (
-    <div className="bg-gradient-linear min-h-screen overflow-y-auto">
+    <div className="bg-gradient-linear min-h-screen overflow-y-auto ">
       <Head>
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
         `}</style>
       </Head>
-      <NavbarBeforeLogin />
+      <div>
+        <NavbarBeforeLogin />
+        <Suspense fallback={<div>Loading...</div>} >
+          <main className="fixed w-full">{children}</main>
+        </Suspense>
+      </div>
+
       {/* {isLoggedIn ? <NavbarAfterLogin /> : <NavbarBeforeLogin />} */}
-      <Suspense fallback={<div>Loading...</div>}>
-        <main>{children}</main>
-      </Suspense>
     </div>
   );
 }

@@ -22,7 +22,7 @@ const useMintLottery = (buyer: string, number: BigNumber, uri: string) => {
   const { data, isLoading, isError, isSuccess, write } =
     useContractWrite(config);
 
-  return { data, isError, isLoading, write };
+  return { data, isLoading, isError, isSuccess, write };
 };
 
 // {

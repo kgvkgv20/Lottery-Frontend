@@ -13,7 +13,7 @@ const GetReward = (installment: string) => {
     functionName: "getReward",
     args: [ethers.BigNumber.from(installment)],
   });
-
+  console.log("Reward data:", data);
   return { data: data!, isError, isLoading };
 };
 
