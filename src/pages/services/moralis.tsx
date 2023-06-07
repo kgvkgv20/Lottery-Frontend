@@ -15,7 +15,7 @@ export const getOwnerNFTs = async (
       apiKey: process.env.NEXT_PUBLIC_MORAILS_API,
     });
   }
-  const chain = "0x5";
+  const chain = "11155111";
   const address = TokenAddress;
   const response = await Moralis.EvmApi.nft.getNFTOwners({
     address,
