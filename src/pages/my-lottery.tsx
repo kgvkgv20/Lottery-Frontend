@@ -162,8 +162,8 @@ const MyLotteryPage = () => {
           {reward === undefined && useContractReadData !== undefined && (
             <div>Loading...</div>
           )}
-          <div className="text-topic">Installment: {installment}</div>
-          {/* Additional rendering or logic */}
+          {/* <div className="text-topic">Installment: {installment}</div>
+         
 
           <button
             onClick={() =>
@@ -174,7 +174,7 @@ const MyLotteryPage = () => {
             }
           >
             showNFTs
-          </button>
+          </button> */}
 
           {metadata && (
             <div>
