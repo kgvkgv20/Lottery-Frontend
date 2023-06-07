@@ -21,7 +21,7 @@ export default function RewardLotteryPage() {
   ) => {
     setInstallmentNumber(event.target.value);
   };
-  const [storedData, setStoredData] = useState<string[]>([]);
+  const [storedData, setStoredData] = useState<string[][]>([]);
   useEffect(() => {
     setMounted(true);
     console.log("__________________________");
@@ -29,18 +29,18 @@ export default function RewardLotteryPage() {
     console.log("__________________________");
 
     if (useContractReadData !== undefined) {
-      const data: string[][] = []; // Update the type of data
+      const data: string[][] = [];
 
       useContractReadData.forEach((innerArray) => {
-        const innerData: string[] = []; // Declare innerData for each innerArray
+        const innerData: string[] = [];
         innerArray.forEach((item, index) => {
-          console.log(item); // Log the item itself
-          innerData.push(item._hex); // Convert the object to string and store the _hex property in the innerData array
+          console.log(item);
+          innerData.push(item._hex);
         });
-        data.push(innerData); // Store the innerData array in the data array
+        data.push(innerData);
       });
 
-      setStoredData(data); // Update the storedData state with the data array
+      setStoredData(data);
     }
   }, [useContractReadData]);
   // console.log("useContractReadData อันหลัง", useContractReadData);
@@ -140,10 +140,7 @@ export default function RewardLotteryPage() {
           <div className="overflow-x-auto">
             <div className="flex flex-wrap gap-4 min-w-full">
               {storedData.map((data, index) => (
-                <div
-                  className="card w-100 glass mt-6 shadow-md"
-                  key={index}
-                >
+                <div className="card w-100 glass mt-6 shadow-md" key={index}>
                   <div className="p-4">
                     <div className="font-bold text-lg text-topic">
                       รางวัลที่ {index + 1}
