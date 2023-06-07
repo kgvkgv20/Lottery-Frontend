@@ -54,7 +54,7 @@ export const lottofactoryabi = [
     ],
     name: "getReward",
     outputs: [
-      { internalType: "uint256", name: "", type: "uint256" },
+      { internalType: "uint256[]", name: "", type: "uint256[]" },
       { internalType: "uint256[]", name: "", type: "uint256[]" },
       { internalType: "uint256[]", name: "", type: "uint256[]" },
       { internalType: "uint256[]", name: "", type: "uint256[]" },
