@@ -74,8 +74,8 @@ export default function BuyLotteryPage() {
     address as Address,
     // ethers.BigNumber.from(lotteryNumber),
     lotteryNumber
-    ? ethers.BigNumber.from(lotteryNumber)
-    : ethers.constants.Zero,
+      ? ethers.BigNumber.from(lotteryNumber)
+      : ethers.constants.Zero,
     uri
   );
 
@@ -107,7 +107,7 @@ export default function BuyLotteryPage() {
                   src={NFT}
                   width="500"
                   height="500"
-                  alt="RainbowKit Demo NFT"
+                  alt="Thai Lottery NFT"
                 />
                 <h1 style={{ marginTop: 24 }}>Rainbow NFT</h1>
               </FrontCard>
