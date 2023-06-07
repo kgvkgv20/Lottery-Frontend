@@ -46,7 +46,7 @@ const MyLotteryPage = () => {
   }, [useContractReadData]);
 
   const [tokenIds, setTokenIds] = useState([]);
-  const [metadata, setMetadata] = useState(null);
+  const [metadata, setMetadata] = useState<{ number: any; installment: any; }[] | null>(null);
 
   const handleLotteryNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -72,11 +72,11 @@ const MyLotteryPage = () => {
         process.env.NEXT_PUBLIC_LOTTO_TOKEN as string
       );
 
-      const ids = nfts.map((nft) => nft.token_id);
-      setTokenIds(ids.reverse());
+      // const ids = nfts.map((nft) => nft.token_id);
+      // setTokenIds(ids.reverse());
 
       const metadataArray = nfts.map((nft) => {
-        const parsedMetadata = parse(nft.metadata);
+        const parsedMetadata = parse(nft.metadata as string);
         return {
           number: parsedMetadata.number,
           installment: parsedMetadata.installment,
@@ -163,7 +163,6 @@ const MyLotteryPage = () => {
             <div>Loading...</div>
           )}
           {/* <div className="text-topic">Installment: {installment}</div>
-         
 
           <button
             onClick={() =>

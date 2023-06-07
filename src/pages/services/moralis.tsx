@@ -1,5 +1,7 @@
 import Moralis from "moralis";
 interface responseNFT {
+  metadata: string;
+  token_id: any;
   owner_of?: string;
   contract_type?: string;
   name?: string;
