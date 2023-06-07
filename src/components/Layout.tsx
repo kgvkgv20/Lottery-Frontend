@@ -30,7 +30,8 @@ export default function Layout({ children }: LayoutProps) {
           @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
         `}</style>
       </Head>
-      <div className="fixed w-full">
+      {/* <div className="fixed w-full"> */}
+      <div className="">
         {isLoggedIn ? <NavbarAfterLogin /> : <NavbarBeforeLogin />}
         <Suspense fallback={<div>Loading...</div>}>
           <main className="">{children}</main>
